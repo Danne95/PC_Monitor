@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Server Monitoring Dashboard</title>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+        h1 { text-align: center; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .chart-row { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .chart { flex: 1; min-width: 300px; max-width: 400px; background: white; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .table-section { margin: 20px 0; background: white; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #eee; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Server Monitoring Dashboard</h1>
+        <div class="chart-row">
+            <div class="chart"><canvas id="cpuChart"></canvas></div>
+            <div class="chart"><canvas id="cpuTempChart"></canvas></div>
+            <div class="chart"><canvas id="memoryChart"></canvas></div>
+            <div class="chart"><canvas id="diskChart"></canvas></div>
+            <div class="chart"><canvas id="gpuTempChart"></canvas></div>
+        </div>
+        <div class="table-section">
+            <h2>Top 5 Memory Processes</h2>
+            <table id="processesTable">
+                <thead><tr><th>Process</th><th>Memory (MB)</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="table-section">
+            <h2>Docker Containers</h2>
+            <table id="containersTable">
+                <thead><tr><th>Name</th><th>CPU (%)</th><th>Memory (%)</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
